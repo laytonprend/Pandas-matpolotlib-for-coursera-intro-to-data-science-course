@@ -1,0 +1,27 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+data=pd.read_csv('Happiness dataset.csv')
+#sort data
+data.sort_values('avg_satisfaction', inplace=True)
+
+x= data['avg_income']
+y=data['avg_satisfaction']
+plt.scatter(x,y)
+plt.xlabel('avg_income')
+plt.ylabel('avg_satisfaction')
+#filter
+top=data[data['avg_satisfaction']>8]
+#label
+for k,row in top.iterrows():
+    plt.text(row['avg_income'],
+            row['avg_satisfaction'],
+            row['country'])
+bottom=data.iloc[0]
+plt.text(bottom['avg_income'],
+         bottom['avg_satisfaction'],
+         bottom['country'])
+plt.show()
+print('1. I chose these variables because I was curious how income and satisfaction were correlated,')
+print('2. I sorted the data by avg satisfaction although this did not alter my output, I fltered for avg_satisfaction>8 and the lowest value using a -1 index to only label points of interest ')
+print('3. Lowest and most satisfied areas are interesting as they could provide insights into what laws/systems can implement high satisfaction and hence pread positive policies into different countries')
